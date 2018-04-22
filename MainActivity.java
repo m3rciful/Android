@@ -10,10 +10,10 @@ import android.widget.Toast; // для сообщений
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText numberField;
-    TextView operationField;
-    Double operand = null;
-    String lastOperation = "";
+    EditText numberField; // поле для ввода чисел и вывода ответа
+    TextView operationField; // поле для отображения операция. Пример: 1 +
+    Double operand = null; // переменная для чисел
+    String lastOperation = ""; // переменая для последних операций
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +44,16 @@ public class MainActivity extends AppCompatActivity {
         operand = savedInstanceState.getDouble("OPERAND");
 
         if(operand > 0) {
-
+            // Получаем для переменной последнию операцию
             lastOperation = savedInstanceState.getString("OPERATION");
-
+            // Если это было операция с ровно (=) не отображаем
             if(!lastOperation.equals("=")) {
-
                 operationField.setText(operand + " " + lastOperation + " ");
             }
         }
         else {
-
-            String operation = operationField.getText().toString();
             operand = null;
-            operation = null;
             operationField.setText("");
-
         }
     }
 
@@ -108,17 +103,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Функция очищается все формы
+    // Функция очищает все формы
     public void onClearClick(View view) {
 
-        String number = numberField.getText().toString();
-        String operation = operationField.getText().toString();
+        String number = numberField.getText().toString(); // поле с числом
+        String operation = operationField.getText().toString(); // поле с операциями
 
         if(number.length() > 0 || operation.length() > 0) {
 
             numberField.setText("");
             operationField.setText("");
             operand = null;
+            lastOperation = "";
 
         }
     }
@@ -130,7 +126,8 @@ public class MainActivity extends AppCompatActivity {
 
             operand = number;
 
-        } else {
+        }
+        else {
 
             if (lastOperation.equals("=")) {
                 lastOperation = operation;

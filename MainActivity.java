@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.calc_main);
+        setContentView(R.layout.calc_main); // выбираем оформление
 
         //записываем значения из полей в переменные
         numberField = (EditText)findViewById(R.id.numberField);
@@ -32,13 +32,9 @@ public class MainActivity extends AppCompatActivity {
         outState.putString("OPERATION", lastOperation);
 
         if(operand != null) {
-
             outState.putDouble("OPERAND", operand);
-
         }
-
         super.onSaveInstanceState(outState);
-
     }
 
     @Override //получаем сохранненый результат
@@ -50,16 +46,17 @@ public class MainActivity extends AppCompatActivity {
         if(operand > 0) {
 
             lastOperation = savedInstanceState.getString("OPERATION");
-            //resultField.setText(operand.toString());
-            //operationField.setText(lastOperation);
 
-        } else {
+            if(!lastOperation.equals("=")) {
+
+                operationField.setText(operand + " " + lastOperation + " ");
+            }
+        }
+        else {
 
             String operation = operationField.getText().toString();
-
             operand = null;
             operation = null;
-
             operationField.setText("");
 
         }
